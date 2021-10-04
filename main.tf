@@ -1,3 +1,14 @@
+
+locals {
+  name   = "complete-example"
+  region = "eu-west-2"
+  tags = {
+    Owner       = "user"
+    Environment = "production"
+    Name        = "complete"
+  }
+}
+
 ################################################################################
 # VPC Module
 ################################################################################

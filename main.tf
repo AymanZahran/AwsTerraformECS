@@ -9,8 +9,8 @@ module "web_server" {
   source = "./modules/aws_asg_server"
 
   name                      = var.name
-  vpc_id                    = vpc.outputs.vpc_id
-  app_private_subnets       = vpc.outputs.private_subnets
+  vpc_id                    = aws_vpc.vpc.outputs.vpc_id
+  app_private_subnets       = aws_vpc.vpc.outputs.private_subnets
   volume_size               = var.volume_size
   tags                      = var.tags
   region                    = var.region

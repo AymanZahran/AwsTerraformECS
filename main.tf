@@ -1,12 +1,12 @@
 module "vpc" {
-  source   = "../../modules/aws_vpc/"
+  source   = "./modules/aws_vpc/"
   vpc_name = var.vpc_name
   vpc_cidr = var.vpc_ip_cidr
   tags     = var.tags
 }
 
 module "web_server" {
-  source = "../../modules/aws_asg_server"
+  source = "./modules/aws_asg_server"
 
   name                      = var.name
   vpc_id                    = vpc.outputs.vpc_id

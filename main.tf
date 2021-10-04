@@ -2,7 +2,6 @@
 # VPC Module
 ################################################################################
 
-
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
   name = local.name

@@ -14,7 +14,7 @@ module "vpc" {
 }
 
 module "web_server" {
-  source = "../../modules/aws_asg_server"
+  source = "./modules/aws_asg_server"
 
   name                      = var.name
   vpc_id                    = data.terraform_remote_state.vpc.outputs.vpc_id

@@ -15,11 +15,22 @@ variable "tags" {
 variable "vpc_name" {
   type        = string
   description = "Name of the VPC being deployed"
-  default     = "My_VPC"
+  default     = "ce_express_vpc"
 }
 
 variable "vpc_ip_cidr" {
   type        = string
   description = "IP CIDR assigned to the environment"
   default     = "10.0.0.0/16"
+}
+
+
+variable "name" {
+  type    = string
+  default = "webserver"
+}
+
+variable "volume_size" {
+  description = "Size of root EBS volume of the container instance"
+  default     = "8"
 }

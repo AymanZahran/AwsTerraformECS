@@ -1,8 +1,8 @@
-data "terraform_remote_state" "vpc" {
-  backend = "local"
-
-  config = {
-    path = "./terraform.tfstate"
+data "aws_vpc" "vpc" {
+  most_recent = true
+  owners = ["self"]
+  tags = {
+    Name   = "MyVPC"
   }
 }
 
@@ -10,7 +10,9 @@ module "vpc" {
   source   = "./modules/aws_vpc/"
   vpc_name = var.vpc_name
   vpc_cidr = var.vpc_ip_cidr
-  tags     = var.tags
+  tags     =  merge(var.tags, {
+    Name   = "MyVPC"
+  })
 }
 
 module "web_server" {

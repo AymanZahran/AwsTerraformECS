@@ -1,7 +1,4 @@
 data "aws_vpc" "vpc" {
-    most_recent = true
-
-  owners = ["self"]
   tags = {
     Name   = var.vpc_name
     Tested = "true"

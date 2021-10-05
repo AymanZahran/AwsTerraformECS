@@ -1,5 +1,5 @@
 data "aws_vpc" "vpc" {
-  tags = {
+  filter = {
     Name   = var.vpc_name
   }
 }

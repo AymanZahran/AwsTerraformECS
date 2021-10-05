@@ -6,7 +6,7 @@ variable "region" {
 
 variable "tags" {
   description = "tags to propogate to all supported resources"
-  type        = map(string)
+  type        = string
 }
 
 variable "az_count" {

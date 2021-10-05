@@ -83,7 +83,7 @@ data "aws_security_group" "default" {
 module "ecs" {
   source = "terraform-aws-modules/ecs/aws"
 
-  name               = l"MyECS"
+  name               = "MyECS"
   container_insights = true
   capacity_providers = ["FARGATE", "FARGATE_SPOT", aws_ecs_capacity_provider.prov1.name]
   default_capacity_provider_strategy = [{
@@ -121,9 +121,9 @@ module "hello_world" {
   cluster_id = module.ecs.ecs_cluster_id
 }
 
-#----- ECS  Resources--------
-
-#For now we only use the AWS ECS optimized ami <https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html>
+################################################################################
+# ECS AMI as a Data
+################################################################################
 data "aws_ami" "amazon_linux_ecs" {
   most_recent = true
   owners = ["amazon"]

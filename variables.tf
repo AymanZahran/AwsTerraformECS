@@ -1,5 +1,5 @@
 variable "region" {
   type = string
   description = "aws region"
-  default = "us-west-2	"
+  default = "us-west-2"
 }

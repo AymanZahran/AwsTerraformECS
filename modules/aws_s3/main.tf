@@ -1,11 +1,3 @@
-data "terraform_remote_state" "vpc" {
-  backend = "local"
-
-  config = {
-    path = "../../ce_express/networking/terraform.tfstate"
-  }
-}
-
 resource "aws_s3_bucket" "web_access_logs_bucket" {
   bucket        = var.bucket_name
   force_destroy = true

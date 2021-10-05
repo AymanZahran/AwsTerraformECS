@@ -15,7 +15,7 @@ variable "tags" {
 variable "vpc_name" {
   type        = string
   description = "Name of the VPC being deployed"
-  default     = "ce_express_vpc"
+  default     = "MyVPC"
 }
 
 variable "vpc_ip_cidr" {

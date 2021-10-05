@@ -1,7 +1,5 @@
 data "aws_vpc" "vpc" {
-  tags = {
-    Name = "MyVPC"
-  }
+    Name = var.vpc_name
 }
 
 module "instance_profile" {

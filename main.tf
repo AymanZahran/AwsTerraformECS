@@ -168,12 +168,12 @@ module "asg" {
   tags = [
     {
       key                 = "Environment"
-      value               = local.environment
+      value               = "Production"
       propagate_at_launch = true
     },
     {
       key                 = "Cluster"
-      value               = local.name
+      value               = "MyCluster"
       propagate_at_launch = true
     },
   ]

@@ -113,6 +113,10 @@ resource "aws_ecs_capacity_provider" "prov1" {
 
 }
 
+resource "aws_iam_service_linked_role" "ecs" {
+  aws_service_name = "ecs.amazonaws.com"
+}
+
 ################################################################################
 # ECS Services Module
 ################################################################################

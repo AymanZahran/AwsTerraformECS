@@ -32,7 +32,7 @@ module "vpc" {
 
   enable_nat_gateway = true
 
-  tags = {
-    Name = "MyVPC"
-  }
+  tags = merge(var.tags,{
+    Env = "Producation"
+  })
 }

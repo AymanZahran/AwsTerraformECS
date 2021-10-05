@@ -7,6 +7,7 @@ variable "region" {
 variable "tags" {
   description = "tags to propogate to all supported resources"
   type        = string
+  Name        = "MyVPC"
 }
 
 variable "az_count" {

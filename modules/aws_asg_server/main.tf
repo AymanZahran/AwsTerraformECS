@@ -1,5 +1,11 @@
 data "aws_vpc" "vpc" {
-    Name = var.vpc_name
+    most_recent = true
+
+  owners = ["self"]
+  tags = {
+    Name   = var.vpc_name
+    Tested = "true"
+  }
 }
 
 module "instance_profile" {

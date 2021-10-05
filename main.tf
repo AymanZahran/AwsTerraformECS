@@ -32,5 +32,7 @@ module "vpc" {
 
   enable_nat_gateway = true
 
-  tags = var.tags
+  tags = {
+    Name = "MyVPC"
+  }
 }

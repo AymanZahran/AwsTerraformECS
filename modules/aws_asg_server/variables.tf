@@ -15,12 +15,20 @@ variable "tags" {
   type        = map(string)
 }
 
-variable "vpc_id" {
-}
-
 variable "ami" {
   type = string
   description = "AMI ID"
+}
+//----------------------------------------------------------------------
+// VPC Variables
+//----------------------------------------------------------------------
+variable "vpc_id" {
+}
+
+variable "vpc_name" {
+  type = string
+  description = "name of the VPC to create"
+  default = "MyVPC"
 }
 
 //----------------------------------------------------------------------

@@ -1,8 +1,6 @@
-data "terraform_remote_state" "vpc" {
-  backend = "local"
-
-  config = {
-    path = "../../ce_express/networking/terraform.tfstate"
+data "aws_vpc" "vpc" {
+  tags = {
+    Name = var.vpc_name
   }
 }
 
@@ -19,7 +17,7 @@ resource "aws_lb" "load_balancer" {
   name               = "ext-alb-${var.name}"
   internal           = "false"
   load_balancer_type = "application"
-  subnets                          = data.terraform_remote_state.vpc.outputs.public_subnets
+  subnets                          = data.aws_vpc.vpc.public_subnets
   enable_cross_zone_load_balancing = "true"
   security_groups                  = [aws_security_group.webserver_security_group.id]
   idle_timeout                     = 60
@@ -47,7 +45,7 @@ resource "aws_lb_target_group" "target_group" {
   name     = "tg-ext-alb-asg-server"
   port     = "80"
   protocol = "HTTP"
-  vpc_id   = data.terraform_remote_state.vpc.outputs.vpc_id
+  vpc_id   = data.aws_vpc.vpc.vpc_id
 
   health_check {
     interval = "30"

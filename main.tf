@@ -1,17 +1,38 @@
+data "aws_availability_zones" "available_az" {
+}
+
+locals {
+  public_cidr      = cidrsubnet(var.vpc_cidr, 1, 0)
+  private_cidr     = cidrsubnet(var.vpc_cidr, 1, 1)
+  private_bit_diff = var.private_subnet_size - element(split("/", local.private_cidr), 1)
+  public_bit_diff  = var.public_subnet_size - element(split("/", local.public_cidr), 1)
+}
+
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
   name = "my-vpc"
   cidr = "10.0.0.0/16"
 
-  azs             = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
-  private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+  azs             = [
+    data.aws_availability_zones.available_az.names[1],
+    data.aws_availability_zones.available_az.names[2],
+    data.aws_availability_zones.available_az.names[3]
+    ]
+  private_subnets = [
+    cidrsubnet(local.private_cidr, local.private_bit_diff,1), 
+    cidrsubnet(local.private_cidr, local.private_bit_diff,2), 
+    cidrsubnet(local.private_cidr, local.private_bit_diff,3)
+    ]
+  public_subnets  = [
+    cidrsubnet(local.public_cidr, local.public_bit_diff,1), 
+    cidrsubnet(local.public_cidr, local.public_bit_diff,2), 
+    cidrsubnet(local.public_cidr, local.public_bit_diff,3)
+    ]
 
   enable_nat_gateway = true
 
-  tags = {
-    Terraform = "true"
-    Environment = "dev"
-  }
+  tags = merge(var.tags,{
+    Env = "Producation"
+  })
 }
